@@ -1,12 +1,10 @@
-const farewell = "Bye, Bye 1, 2, 3!!!"
-
 class Node {
-    constructor(value, nextNode) {
-        this.value = null; 
-        this.nextNode = null; 
+    constructor(value) {
+        this.value = value; //value of the node 
+        this.nextNode = null; //points to the next node, null by default
     }
 }
 
 
-export {farewell, Node}
+export {Node}
 
