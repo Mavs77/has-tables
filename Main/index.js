@@ -61,9 +61,32 @@ class HashMap {
 
 function hash(key) {
     let hashCode = 0; 
-    const primeNumber = 31; 
+    const primeNumber = 31; //reduces patterns that might cause two keys with similar characters to map to the same index. 
     for (let i = 0; i < key.length; i++) {
         hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity; 
     }
     return hashCode
+}
+
+// Set a key-value pair 
+function set(key, value) {
+    const index = this.hash(key);
+    const bucket = this.buckets[index]; 
+    
+    //check if the key already exists
+    for (const entry of bucket) {
+        if(entry.key === key) {
+            entry.value = value; // update value if key exists 
+            return; 
+        }
+    }
+
+    //add new key-value pair
+    bucket.push({key, value}); 
+    this.size++; 
+
+    //check if resizing is needed
+    if(this.size / this.capacity > this.loadFactor) {
+        this.resize(); 
+    }
 }
